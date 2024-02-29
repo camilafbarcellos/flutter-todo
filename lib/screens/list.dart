@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:todo/model/tarefa.dart';
-import 'package:todo/screens/form.dart';
+import '/model/tarefa.dart';
+import '/screens/form.dart';
 
 // card de uma tarefa
 class ItemTarefa extends StatelessWidget {

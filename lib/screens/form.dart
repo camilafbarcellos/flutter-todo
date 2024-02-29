@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:todo/components/editor.dart';
-import 'package:todo/model/tarefa.dart';
+import '/components/editor.dart';
+import '/model/tarefa.dart';
 
 // tela do formulário
 class FormTarefa extends StatelessWidget {

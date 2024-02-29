@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:todo/screens/list.dart';
+import '/screens/list.dart';
 
 void main() {
   runApp(TarefaApp());
