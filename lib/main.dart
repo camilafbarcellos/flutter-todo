@@ -6,7 +6,7 @@ void main() {
       appBar: AppBar( // widget da barra superior
         title: Text("Lista de Tarefas"), // título da página
       ),
-      body:
+      body: ListaTarefa(),
       floatingActionButton: FloatingActionButton( // botão flutuante
         onPressed: (){
           print("Pressionou botão"); // print no terminal ao pressionar
@@ -43,3 +43,18 @@ class ItemTarefa extends StatelessWidget { // widget estático
 
 }
 
+// lista de tarefas
+class ListaTarefa extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    return Column( // lista das tarefas em uma coluna de cards
+      children: [
+        ItemTarefa((Tarefa("Estudar Flutter", "Ler documentação"))),
+        ItemTarefa((Tarefa("Ler livro", "Percy Jackson"))),
+        ItemTarefa((Tarefa("Fazer trabalho", "TDM"))),
+      ],
+    );
+    throw UnimplementedError();
+  }
+
+}
