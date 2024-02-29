@@ -68,6 +68,9 @@ class ListaTarefa extends StatelessWidget {
               MaterialPageRoute(builder: (context){ // gerenciador de rotas
                 return FormTarefa(); // abre FormTarefa na nova tela
               }));
+          future.then((tarefa){
+            print('Tarefa retornada no future: $tarefa');
+          });
         },
         child: Icon(Icons.add),
       ),
