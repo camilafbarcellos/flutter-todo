@@ -24,6 +24,12 @@ void main() {
           ),
         ],
       ),
+      floatingActionButton: FloatingActionButton( // botão flutuante
+        onPressed: (){
+          print("Pressionou botão"); // print no terminal ao pressionar
+        },
+        child: Icon(Icons.add),
+      ),
     )
   ));
 }
