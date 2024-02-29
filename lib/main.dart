@@ -107,31 +107,10 @@ class FormTarefa extends StatelessWidget {
       ),
       body: Column(
         children: [
-          // adicionar espaçamento -> padding
-          Padding(
-            padding:
-                const EdgeInsets.all(16.0), // padding de 16pt em todos os lados
-            child: TextField(
-              style: TextStyle(fontSize: 16.0),
-              controller: _controladorTarefa,
-              decoration: InputDecoration(
-                  icon: Icon(Icons.add_alert),
-                  labelText: "Tarefa",
-                  hintText: "Indique a tarefa"),
-            ),
-          ),
-          Padding(
-            padding:
-                const EdgeInsets.all(16.0), // padding de 16pt em todos os lados
-            child: TextField(
-              style: TextStyle(fontSize: 16.0),
-              controller: _controladorObs,
-              decoration: InputDecoration(
-                  icon: Icon(Icons.emoji_objects),
-                  labelText: "Observação",
-                  hintText: "Indique a observação da tarefa"),
-            ),
-          )
+          Editor(_controladorTarefa, "Tarefa", "Indique a tarefa",
+              Icons.assignment),
+          Editor(_controladorObs, "Observação", "Indique a observação",
+              Icons.emoji_objects),
         ],
       ),
       floatingActionButton: FloatingActionButton(
@@ -154,5 +133,32 @@ class FormTarefa extends StatelessWidget {
     // exibir mensagem snackbar avisando que a tarefa foi criada
     final SnackBar snackBar = SnackBar(content: const Text("Tarefa criada!"));
     ScaffoldMessenger.of(context).showSnackBar(snackBar);
+  }
+}
+
+// construtor da criação de tarefa
+class Editor extends StatelessWidget {
+  final TextEditingController controlador;
+  final String rotulo;
+  final String dica;
+  final IconData? icone; // campo opcional
+
+  Editor(this.controlador, this.rotulo, this.dica, this.icone);
+
+  @override
+  Widget build(BuildContext context) {
+    return Padding(
+      // adicionar espaçamento -> padding
+      padding: const EdgeInsets.all(16.0), // padding de 16pt em todos os lados
+      child: TextField(
+        style: TextStyle(fontSize: 16.0),
+        controller: this.controlador,
+        decoration: InputDecoration(
+            icon: icone != null ? Icon(icone) : null,
+            labelText: this.rotulo,
+            hintText: this.dica),
+      ),
+    );
+    throw UnimplementedError();
   }
 }
