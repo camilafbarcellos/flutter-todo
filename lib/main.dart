@@ -78,6 +78,10 @@ class ListaTarefa extends StatelessWidget {
 
 // tela do formulário
 class FormTarefa extends StatelessWidget {
+  // controladores para capturar os dados da tarefa
+  final TextEditingController _controladorTarefa = TextEditingController();
+  final TextEditingController _controladorObs = TextEditingController();
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -87,13 +91,15 @@ class FormTarefa extends StatelessWidget {
           // adicionar espaçamento -> padding
           Padding(padding: const EdgeInsets.all(16.0), // padding de 16pt em todos os lados
               child: TextField(style: TextStyle(fontSize: 16.0),
-              decoration: InputDecoration(
+              controller: _controladorTarefa,
+                decoration: InputDecoration(
                 icon: Icon(Icons.add_alert),
                 labelText: "Tarefa",
                 hintText: "Indique a tarefa"),),
           ),
           Padding(padding: const EdgeInsets.all(16.0), // padding de 16pt em todos os lados
             child: TextField(style: TextStyle(fontSize: 16.0),
+              controller: _controladorObs,
               decoration: InputDecoration(
                   icon: Icon(Icons.emoji_objects),
                   labelText: "Observação",
@@ -103,11 +109,23 @@ class FormTarefa extends StatelessWidget {
       ),
       floatingActionButton: FloatingActionButton(
         onPressed: (){
-
+          criarTarefa(context);
         },
         child: Icon(Icons.save),
       ),
     );
     throw UnimplementedError();
+  }
+
+  // método para criar tarefa
+  void criarTarefa(BuildContext context) {
+    // captura dados da tarefa pelos controladores
+    final tarefaCriada = Tarefa(_controladorTarefa.text, _controladorObs.text);
+    print(tarefaCriada);
+    // mandar tarefa criada para a tela de lista tarefas pelo Navigator
+    Navigator.pop(context, tarefaCriada);
+    // exibir mensagem snackbar avisando que a tarefa foi criada
+    final SnackBar snackBar = SnackBar(content: const Text("Tarefa criada!"));
+    ScaffoldMessenger.of(context).showSnackBar(snackBar);
   }
 }
