@@ -6,24 +6,7 @@ void main() {
       appBar: AppBar( // widget da barra superior
         title: Text("Lista de Tarefas"), // título da página
       ),
-      body: Column( // lista das tarefas em uma coluna de cards
-        children: [
-          Card(
-            child: ListTile( // tarefa
-              leading: Icon(Icons.add_alert),
-              title: Text("Organizar aula TDM"),
-              subtitle: Text("Publicar no classroom"),
-            ),
-          ),
-          Card(
-            child: ListTile(
-              leading: Icon(Icons.add_alert),
-              title: Text("Estudar Flutter"),
-              subtitle: Text("Ler documentação e codar"),
-            ),
-          ),
-        ],
-      ),
+      body:
       floatingActionButton: FloatingActionButton( // botão flutuante
         onPressed: (){
           print("Pressionou botão"); // print no terminal ao pressionar
@@ -34,9 +17,29 @@ void main() {
   ));
 }
 
-class Tarefa{
+// objeto da tarefa
+class Tarefa {
   final String descricao;
   final String obs;
   Tarefa(this.descricao, this.obs); // construtor
+}
+
+// card de uma tarefa
+class ItemTarefa extends StatelessWidget { // widget estático
+  final Tarefa _tarefa; // convenção de nome de objetos privados com _
+  const ItemTarefa(this._tarefa); // ao ser chamado, deve receber uma Tarefa
+
+  @override // construtor que define o que o widget vai mostrar (card da tarefa)
+  Widget build(BuildContext context) {
+    return Card(
+      child: ListTile(
+        leading: Icon(Icons.add_alert),
+        title: Text(this._tarefa.descricao),
+        subtitle: Text(this._tarefa.obs),
+      ),
+    );
+    throw UnimplementedError();
+  }
+
 }
 
