@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import '/database/tarefa_dao.dart';
 import '/components/editor.dart';
 import '/model/tarefa.dart';
 
@@ -41,14 +42,18 @@ class FormTarefaState extends State<FormTarefa> {
 
   // método para criar tarefa
   void criarTarefa(BuildContext context) {
+    TarefaDao _dao = TarefaDao();
     // captura dados da tarefa pelos controladores
     final tarefaCriada =
         Tarefa(0, widget._controladorTarefa.text, widget._controladorObs.text);
-    print(tarefaCriada);
-    // mandar tarefa criada para a tela de lista tarefas pelo Navigator
-    Navigator.pop(context, tarefaCriada);
-    // exibir mensagem snackbar avisando que a tarefa foi criada
-    final SnackBar snackBar = SnackBar(content: const Text("Tarefa criada!"));
-    ScaffoldMessenger.of(context).showSnackBar(snackBar);
+    _dao.save(tarefaCriada).then((id) {
+      print(tarefaCriada);
+      // mandar tarefa criada para a tela de lista tarefas pelo Navigator
+      Navigator.pop(context, tarefaCriada);
+      // exibir mensagem snackbar avisando que a tarefa foi criada
+      final SnackBar snackBar = SnackBar(content: const Text("Tarefa criada!"));
+      ScaffoldMessenger.of(context).showSnackBar(snackBar);
+      _dao.findAll().then((tarefa) => print(tarefa.toString()));
+    });
   }
 }
