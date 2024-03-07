@@ -29,7 +29,7 @@ class ListaTarefa extends StatefulWidget {
 
   @override
   State<StatefulWidget> createState() {
-    return ListaTarefaState();
+    return ListaTarefaState(); // retorna o controlador de estado
   }
 }
 
@@ -70,7 +70,7 @@ class ListaTarefaState extends State<ListaTarefa> {
           future.then((tarefa) {
             print('Tarefa retornada no future: $tarefa');
             widget._tarefas.add(tarefa); // adicionar tarefa na lista
-            // seta o estado da tarefa
+            // seta o estado da tarefa e executa o build novamente (reconstrói tudo)
             setState(() {});
           });
         },

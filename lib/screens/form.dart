@@ -3,11 +3,18 @@ import '/components/editor.dart';
 import '/model/tarefa.dart';
 
 // tela do formulário
-class FormTarefa extends StatelessWidget {
+class FormTarefa extends StatefulWidget {
   // controladores para capturar os dados da tarefa
   final TextEditingController _controladorTarefa = TextEditingController();
   final TextEditingController _controladorObs = TextEditingController();
 
+  @override
+  State<StatefulWidget> createState() {
+    return FormTarefaState();
+  }
+}
+
+class FormTarefaState extends State<FormTarefa> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -16,9 +23,9 @@ class FormTarefa extends StatelessWidget {
       ),
       body: Column(
         children: [
-          Editor(_controladorTarefa, "Tarefa", "Indique a tarefa",
+          Editor(widget._controladorTarefa, "Tarefa", "Indique a tarefa",
               Icons.assignment),
-          Editor(_controladorObs, "Observação", "Indique a observação",
+          Editor(widget._controladorObs, "Observação", "Indique a observação",
               Icons.emoji_objects),
         ],
       ),
@@ -35,7 +42,8 @@ class FormTarefa extends StatelessWidget {
   // método para criar tarefa
   void criarTarefa(BuildContext context) {
     // captura dados da tarefa pelos controladores
-    final tarefaCriada = Tarefa(_controladorTarefa.text, _controladorObs.text);
+    final tarefaCriada =
+        Tarefa(widget._controladorTarefa.text, widget._controladorObs.text);
     print(tarefaCriada);
     // mandar tarefa criada para a tela de lista tarefas pelo Navigator
     Navigator.pop(context, tarefaCriada);
