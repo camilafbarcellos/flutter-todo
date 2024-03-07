@@ -1,21 +1,8 @@
-import 'package:flutter/material.dart';
 import 'package:sqflite/sqflite.dart';
-import 'package:path/path.dart';
+import 'app_database.dart';
 import '/model/tarefa.dart';
 
 class TarefaDao {
-  // método para recuperar ref do banco de dados no futuro
-  Future<Database> getDatabase() async {
-    final String path = join(await getDatabasesPath(), 'dbtarefas.db');
-    return openDatabase(path, onCreate: (db, version) {
-      // criação do database (primeira execução do app cria a tabela)
-      db.execute('CREATE TABLE tarefas ('
-          'id INTEGER PRIMARY KEY, '
-          'descricao TEXT, '
-          'obs TEXT)');
-    }, version: 1);
-  }
-
   // recebe um objeto e transforma num map
   Map<String, dynamic> toMap(Tarefa tarefa) {
     final Map<String, dynamic> tarefaMap = Map();
