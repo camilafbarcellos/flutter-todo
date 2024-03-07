@@ -43,7 +43,7 @@ class FormTarefaState extends State<FormTarefa> {
   void criarTarefa(BuildContext context) {
     // captura dados da tarefa pelos controladores
     final tarefaCriada =
-        Tarefa(widget._controladorTarefa.text, widget._controladorObs.text);
+        Tarefa(0, widget._controladorTarefa.text, widget._controladorObs.text);
     print(tarefaCriada);
     // mandar tarefa criada para a tela de lista tarefas pelo Navigator
     Navigator.pop(context, tarefaCriada);
