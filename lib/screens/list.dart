@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:todo/database/tarefa_dao.dart';
 import '/model/tarefa.dart';
 import '/screens/form.dart';
 
@@ -36,6 +37,8 @@ class ListaTarefa extends StatefulWidget {
 // classe para controlar os states da ListaTarefa stateful
 // segundo: cria classe para controlar
 class ListaTarefaState extends State<ListaTarefa> {
+  final TarefaDao _dao = TarefaDao();
+
   @override
   Widget build(BuildContext context) {
     // widget._tarefas.add((Tarefa("Estudar Flutter", "Ler documentação")));
@@ -44,17 +47,36 @@ class ListaTarefaState extends State<ListaTarefa> {
     return Scaffold(
       // widget da página home
       appBar: AppBar(
-        // widget da barra superior
-        title: Text("Lista de Tarefas"), // título da página
-      ),
-      body: ListView.builder(
-          // componente automático de listagem
-          itemCount: widget
-              ._tarefas.length, // tamanho da lista é a quantidade de items
-          itemBuilder: (context, indice) {
-            // retorna um ItemTarefa para cada tarefa da lista
-            final tarefa = widget._tarefas[indice];
-            return ItemTarefa(tarefa);
+          // widget da barra superior
+          title: Text("Lista de Tarefas") // título da página
+          ),
+      body: FutureBuilder<List<Tarefa>>(
+          // construtor para lista futura
+          initialData: [], // inicialmente vazio
+          future:
+              Future.delayed(Duration(seconds: 1)) // aguarda 1s para o retorno
+                  .then((value) => _dao.findAll()), // valor vem do findAll
+          builder: (context, snapshot) {
+            switch (snapshot.connectionState) {
+              case ConnectionState
+                    .done: // só constrói caso tenha carregado tudo (done)
+                if (snapshot.data != null) {
+                  // caso tenha retorno
+                  final List<Tarefa>? tarefas =
+                      snapshot.data; // captura tarefas
+                  return ListView.builder(
+                      // constrói ListView com as tarefas
+                      itemBuilder: (context, index) {
+                        final Tarefa tarefa = tarefas![index];
+                        return ItemTarefa(tarefa);
+                      },
+                      itemCount: tarefas!.length);
+                }
+                break;
+              default:
+                return Center(child: Text("Nenhuma tarefa"));
+            }
+            return Center(child: Text("Carregando..."));
           }),
       floatingActionButton: FloatingActionButton(
         // botão flutuante
