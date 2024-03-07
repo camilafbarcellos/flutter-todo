@@ -6,10 +6,10 @@ import '/screens/list.dart';
 void main() {
   runApp(TarefaApp());
   TarefaDao db = TarefaDao();
-  db.save(Tarefa(0, 'tarefa teste', 'obs teste')).then((id) {
-    print('id gerado: ' + id.toString());
-    db.findAll().then((tarefa) => print(tarefa.toString()));
-  });
+  db.findAll().then((tarefa) => print(tarefa.toString()));
+  // db.save(Tarefa(0, 'tarefa teste', 'obs teste')).then((id) {
+  //   print('id gerado: ' + id.toString());
+  // });
 }
 
 // tela da lista de tarefas
