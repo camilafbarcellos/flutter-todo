@@ -22,13 +22,24 @@ class ItemTarefa extends StatelessWidget {
 }
 
 // lista de tarefas
-class ListaTarefa extends StatelessWidget {
+// primeiro: deixa StatefulWidget e tira o @override antigo
+// terceiro: gera o novo @override de stateful
+class ListaTarefa extends StatefulWidget {
   final List<Tarefa> _tarefas = [];
 
   @override
+  State<StatefulWidget> createState() {
+    return ListaTarefaState();
+  }
+}
+
+// classe para controlar os states da ListaTarefa stateful
+// segundo: cria classe para controlar
+class ListaTarefaState extends State<ListaTarefa> {
+  @override
   Widget build(BuildContext context) {
-    _tarefas.add((Tarefa("Estudar Flutter", "Ler documentação")));
-    _tarefas.add((Tarefa("Fazer trabalho", "TDM")));
+    // widget._tarefas.add((Tarefa("Estudar Flutter", "Ler documentação")));
+    // widget._tarefas.add((Tarefa("Fazer trabalho", "TDM")));
 
     return Scaffold(
       // widget da página home
@@ -38,11 +49,11 @@ class ListaTarefa extends StatelessWidget {
       ),
       body: ListView.builder(
           // componente automático de listagem
-          itemCount:
-              _tarefas.length, // tamanho da lista é a quantidade de items
+          itemCount: widget
+              ._tarefas.length, // tamanho da lista é a quantidade de items
           itemBuilder: (context, indice) {
             // retorna um ItemTarefa para cada tarefa da lista
-            final tarefa = _tarefas[indice];
+            final tarefa = widget._tarefas[indice];
             return ItemTarefa(tarefa);
           }),
       floatingActionButton: FloatingActionButton(
@@ -58,7 +69,9 @@ class ListaTarefa extends StatelessWidget {
           }));
           future.then((tarefa) {
             print('Tarefa retornada no future: $tarefa');
-            _tarefas.add(tarefa); // adicionar tarefa na lista
+            widget._tarefas.add(tarefa); // adicionar tarefa na lista
+            // seta o estado da tarefa
+            setState(() {});
           });
         },
         child: Icon(Icons.add),
