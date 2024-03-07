@@ -1,8 +1,9 @@
 // objeto da tarefa
 class Tarefa {
+  final int id;
   final String descricao;
   final String obs;
-  Tarefa(this.descricao, this.obs); // construtor
+  Tarefa(this.id, this.descricao, this.obs); // construtor
 
   @override
   String toString() {
