@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:todo/menu.dart';
 import '/database/tarefa_dao.dart';
-import '/model/tarefa.dart';
-import '/screens/list.dart';
 
 void main() {
   runApp(TarefaApp());
@@ -18,7 +17,7 @@ class TarefaApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
         // widget pai do app com Material
-        home: ListaTarefa());
+        home: MenuOptions());
     throw UnimplementedError();
   }
 }
