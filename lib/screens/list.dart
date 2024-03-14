@@ -86,7 +86,15 @@ class ListaTarefaState extends State<ListaTarefa> {
   // card de uma tarefa
   Widget ItemTarefa(BuildContext context, Tarefa _tarefa) {
     return GestureDetector(
-      onTap: () {},
+      onTap: () {
+        // enviar contexto e tarefa para edição
+        final Future future =
+            Navigator.push(context, MaterialPageRoute(builder: (context) {
+          return FormTarefa(tarefa: _tarefa);
+        }));
+        // em algum momento do futuro, atualizar o estado com setState
+        future.then((value) => setState(() {}));
+      },
       child: Card(
         child: ListTile(
           leading: Icon(Icons.add_alert), // esquerda
