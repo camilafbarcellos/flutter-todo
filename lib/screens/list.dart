@@ -85,11 +85,30 @@ class ListaTarefaState extends State<ListaTarefa> {
 
   // card de uma tarefa
   Widget ItemTarefa(BuildContext context, Tarefa _tarefa) {
-    return Card(
-      child: ListTile(
-        leading: Icon(Icons.add_alert),
-        title: Text(_tarefa.descricao),
-        subtitle: Text(_tarefa.obs),
+    return GestureDetector(
+      onTap: () {},
+      child: Card(
+        child: ListTile(
+          leading: Icon(Icons.add_alert), // esquerda
+          title: Text(_tarefa.descricao),
+          subtitle: Text(_tarefa.obs),
+          trailing: Row(
+            // direita
+            mainAxisSize: MainAxisSize.min,
+            children: <Widget>[
+              GestureDetector(
+                onTap: () {
+                  // remover a tarefa e atualizar o estado com setState
+                  _dao.delete(_tarefa.id).then((value) => setState(() {}));
+                },
+                child: Padding(
+                  padding: EdgeInsets.all(8),
+                  child: Icon(Icons.remove_circle, color: Colors.red),
+                ),
+              )
+            ],
+          ),
+        ),
       ),
     );
   }
