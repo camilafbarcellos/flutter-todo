@@ -26,7 +26,7 @@ Future<Database> getDatabase() async {
       print("Criando nova tabela");
       await batch.commit();
     },
-    version: 2,
+    version: 1,
     onDowngrade: onDatabaseDowngradeDelete,
   );
 }
