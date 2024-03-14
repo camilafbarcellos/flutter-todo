@@ -3,25 +3,6 @@ import 'package:todo/database/tarefa_dao.dart';
 import '/model/tarefa.dart';
 import '/screens/form.dart';
 
-// card de uma tarefa
-class ItemTarefa extends StatelessWidget {
-  // widget estático
-  final Tarefa _tarefa; // convenção de nome de objetos privados com _
-  const ItemTarefa(this._tarefa); // ao ser chamado, deve receber uma Tarefa
-
-  @override // construtor que define o que o widget vai mostrar (card da tarefa)
-  Widget build(BuildContext context) {
-    return Card(
-      child: ListTile(
-        leading: Icon(Icons.add_alert),
-        title: Text(this._tarefa.descricao),
-        subtitle: Text(this._tarefa.obs),
-      ),
-    );
-    throw UnimplementedError();
-  }
-}
-
 // lista de tarefas
 // primeiro: deixa StatefulWidget e tira o @override antigo
 // terceiro: gera o novo @override de stateful
@@ -68,7 +49,7 @@ class ListaTarefaState extends State<ListaTarefa> {
                       // constrói ListView com as tarefas
                       itemBuilder: (context, index) {
                         final Tarefa tarefa = tarefas![index];
-                        return ItemTarefa(tarefa);
+                        return ItemTarefa(context, tarefa);
                       },
                       itemCount: tarefas!.length);
                 }
@@ -100,5 +81,16 @@ class ListaTarefaState extends State<ListaTarefa> {
       ),
     );
     throw UnimplementedError();
+  }
+
+  // card de uma tarefa
+  Widget ItemTarefa(BuildContext context, Tarefa _tarefa) {
+    return Card(
+      child: ListTile(
+        leading: Icon(Icons.add_alert),
+        title: Text(_tarefa.descricao),
+        subtitle: Text(_tarefa.obs),
+      ),
+    );
   }
 }
