@@ -10,17 +10,23 @@ Future<Database> getDatabase() async {
       'descricao TEXT)';
 
   final String path = join(await getDatabasesPath(), 'dbtarefas.db');
-  return openDatabase(path, onCreate: (db, version) {
-    // criação do database (primeira execução do app cria a tabela)
-    db.execute(TarefaDao.tableSQL);
-  }, onUpgrade: (db, oldVersion, newVersion) async {
-    var batch = db.batch();
-    print("Versão atinga: " + oldVersion.toString());
-    print("Versão nova: " + newVersion.toString());
-    if (newVersion == 2) {
-      batch.execute(tableSQL2);
-    }
-    print("Criando nova tabela");
-    await batch.commit();
-  }, version: 2);
+  return openDatabase(
+    path,
+    onCreate: (db, version) {
+      // criação do database (primeira execução do app cria a tabela)
+      db.execute(TarefaDao.tableSQL);
+    },
+    onUpgrade: (db, oldVersion, newVersion) async {
+      var batch = db.batch();
+      print("Versão atinga: " + oldVersion.toString());
+      print("Versão nova: " + newVersion.toString());
+      if (newVersion == 2) {
+        batch.execute(tableSQL2);
+      }
+      print("Criando nova tabela");
+      await batch.commit();
+    },
+    version: 2,
+    onDowngrade: onDatabaseDowngradeDelete,
+  );
 }
