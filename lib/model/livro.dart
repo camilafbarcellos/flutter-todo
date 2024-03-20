@@ -3,7 +3,7 @@ class Livro {
   final String nome;
   final String autor;
   final String editora;
-  final int ano;
+  final String ano;
   final int lido;
   Livro(this.id, this.nome, this.autor, this.editora, this.ano, this.lido);
 

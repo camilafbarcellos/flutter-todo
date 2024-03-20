@@ -15,7 +15,7 @@ class LivroDao {
       'nome TEXT, '
       'autor TEXT, '
       'editora TEXT, '
-      'ano INTEGER, '
+      'ano TEXT, '
       'lido INTEGER)';
 
   Map<String, dynamic> toMap(Livro livro) {

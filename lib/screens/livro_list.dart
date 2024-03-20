@@ -96,7 +96,7 @@ class ListaLivroState extends State<ListaLivro> {
             children: [
               Text(_livro.autor),
               Text(_livro.editora),
-              Text("${_livro.ano}"),
+              Text(_livro.ano),
               _livro.lido == 1
                   ? Icon(Icons.check_circle_outline)
                   : Icon(Icons.circle_outlined),
