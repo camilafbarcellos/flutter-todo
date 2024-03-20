@@ -39,8 +39,8 @@ class ListaTarefaState extends State<ListaTarefa> {
                   .then((value) => _dao.findAll()), // valor vem do findAll
           builder: (context, snapshot) {
             switch (snapshot.connectionState) {
-              case ConnectionState
-                    .done: // só constrói caso tenha carregado tudo (done)
+              // só constrói caso tenha carregado tudo (done)
+              case ConnectionState.done:
                 if (snapshot.data != null) {
                   // caso tenha retorno
                   final List<Tarefa>? tarefas =
@@ -106,8 +106,8 @@ class ListaTarefaState extends State<ListaTarefa> {
             children: <Widget>[
               GestureDetector(
                 onTap: () {
-                  // remover a tarefa e atualizar o estado com setState
-                  _dao.delete(_tarefa.id).then((value) => setState(() {}));
+                  // chama a janela de confirmação
+                  showDeleteAlertDialog(context, _tarefa);
                 },
                 child: Padding(
                   padding: EdgeInsets.all(8),
@@ -118,6 +118,43 @@ class ListaTarefaState extends State<ListaTarefa> {
           ),
         ),
       ),
+    );
+  }
+
+  showDeleteAlertDialog(BuildContext context, Tarefa _tarefa) {
+    Widget cancelButton = TextButton(
+      child: Text("Cancelar"),
+      onPressed: () {
+        // fechar a janela de diálogo
+        Navigator.pop(context);
+      },
+    );
+    Widget continueButton = TextButton(
+      child: Text("Confirmar"),
+      onPressed: () {
+        // remover a tarefa e atualizar o estado com setState
+        _dao.delete(_tarefa.id).then((value) {
+          setState(() {});
+          // fechar a janela de diálogo
+          Navigator.pop(context);
+        });
+      },
+    );
+    // set up the AlertDialog
+    AlertDialog alert = AlertDialog(
+      title: Text("Confirmação"),
+      content: Text("Você tem certeza que deseja excluir esta tarefa?"),
+      actions: [
+        cancelButton,
+        continueButton,
+      ],
+    );
+    // show the dialog
+    showDialog(
+      context: context,
+      builder: (BuildContext context) {
+        return alert;
+      },
     );
   }
 }
