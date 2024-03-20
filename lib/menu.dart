@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
+import '/screens/livro_list.dart';
 import '/screens/gifs.dart';
-import '/screens/list.dart';
+import '/screens/tarefa_list.dart';
 
 class MenuOptions extends StatefulWidget {
   @override
@@ -20,6 +21,7 @@ class MenuOptionsState extends State<MenuOptions> {
         controller: pc,
         children: [
           ListaTarefa(),
+          ListaLivro(),
           GifsPage(),
         ],
         onPageChanged: setPaginaAtual,
@@ -29,6 +31,8 @@ class MenuOptionsState extends State<MenuOptions> {
         items: [
           BottomNavigationBarItem(
               icon: Icon(Icons.access_alarm), label: 'Tarefas'),
+          BottomNavigationBarItem(
+              icon: Icon(Icons.menu_book_outlined), label: 'Livros'),
           BottomNavigationBarItem(
               icon: Icon(Icons.gif_box_outlined), label: 'GIFs')
         ],
