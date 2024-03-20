@@ -107,7 +107,7 @@ class ListaTarefaState extends State<ListaTarefa> {
               GestureDetector(
                 onTap: () {
                   // chama a janela de confirmação
-                  showDeleteAlertDialog(context, _tarefa);
+                  alertaConfirmarExclusao(context, _tarefa);
                 },
                 child: Padding(
                   padding: EdgeInsets.all(8),
@@ -121,7 +121,7 @@ class ListaTarefaState extends State<ListaTarefa> {
     );
   }
 
-  showDeleteAlertDialog(BuildContext context, Tarefa _tarefa) {
+  alertaConfirmarExclusao(BuildContext context, Tarefa _tarefa) {
     Widget cancelButton = TextButton(
       child: Text("Cancelar"),
       onPressed: () {

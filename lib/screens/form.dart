@@ -20,7 +20,7 @@ class FormTarefa extends StatefulWidget {
 
 class FormTarefaState extends State<FormTarefa> {
   int? _id; // pode conter valor nulo (inclusão de tarefa)
-  final _formKey = GlobalKey<FormState>(); // key para o widget do form
+  final _formTarefaKey = GlobalKey<FormState>(); // key para o widget do form
 
   // preparar form para receber edição de tarefa
   @override
@@ -41,7 +41,7 @@ class FormTarefaState extends State<FormTarefa> {
         title: Text("Adicionar Tarefa"),
       ),
       body: Form(
-        key: _formKey,
+        key: _formTarefaKey,
         child: Column(
           children: [
             Padding(
@@ -85,11 +85,11 @@ class FormTarefaState extends State<FormTarefa> {
               ),
             ),
             Container(
-              padding: EdgeInsets.symmetric(vertical: 16),
+              padding: EdgeInsets.symmetric(horizontal: 8, vertical: 16),
               width: 125,
               child: ElevatedButton(
                 onPressed: () {
-                  if (_formKey.currentState!.validate()) {
+                  if (_formTarefaKey.currentState!.validate()) {
                     criarTarefa(context);
                   }
                 },
