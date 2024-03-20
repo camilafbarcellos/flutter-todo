@@ -7,7 +7,7 @@ import '/model/tarefa.dart';
 class FormTarefa extends StatefulWidget {
   // ao editar uma tarefa, o objeto vem preenchido
   final Tarefa? tarefa; // pode chegar com valor nulo (inclusão de tarefa)
-  FormTarefa({this.tarefa}); // {} -> opcionalidade
+  FormTarefa({super.key, this.tarefa}); // {} -> opcionalidade
   // controladores para capturar os dados da tarefa
   final TextEditingController _controladorTarefa = TextEditingController();
   final TextEditingController _controladorObs = TextEditingController();
@@ -20,6 +20,7 @@ class FormTarefa extends StatefulWidget {
 
 class FormTarefaState extends State<FormTarefa> {
   int? _id; // pode conter valor nulo (inclusão de tarefa)
+  final _formKey = GlobalKey<FormState>(); // key para o widget do form
 
   // preparar form para receber edição de tarefa
   @override
@@ -39,19 +40,74 @@ class FormTarefaState extends State<FormTarefa> {
       appBar: AppBar(
         title: Text("Adicionar Tarefa"),
       ),
-      body: Column(
-        children: [
-          Editor(widget._controladorTarefa, "Tarefa", "Indique a tarefa",
-              Icons.assignment),
-          Editor(widget._controladorObs, "Observação", "Indique a observação",
-              Icons.emoji_objects),
-        ],
-      ),
-      floatingActionButton: FloatingActionButton(
-        onPressed: () {
-          criarTarefa(context);
-        },
-        child: Icon(Icons.save),
+      body: Form(
+        key: _formKey,
+        child: Column(
+          children: [
+            Padding(
+              padding: EdgeInsets.symmetric(horizontal: 8, vertical: 16),
+              child: TextFormField(
+                validator: (value) {
+                  if (value == null || value.isEmpty) {
+                    return 'Preenchimento obrigatório!';
+                  }
+                  return null;
+                },
+                controller: widget._controladorTarefa,
+                decoration: InputDecoration(
+                  labelText: 'Tarefa',
+                  hintText: 'Indique a tarefa',
+                  prefixIcon: Padding(
+                    padding: EdgeInsets.all(0.0),
+                    child: Icon(Icons.assignment),
+                  ),
+                ),
+              ),
+            ),
+            Padding(
+              padding: EdgeInsets.symmetric(horizontal: 8, vertical: 16),
+              child: TextFormField(
+                validator: (value) {
+                  if (value == null || value.isEmpty) {
+                    return 'Preenchimento obrigatório!';
+                  }
+                  return null;
+                },
+                controller: widget._controladorObs,
+                decoration: InputDecoration(
+                  labelText: 'Observação',
+                  hintText: 'Indique a observação',
+                  prefixIcon: Padding(
+                    padding: EdgeInsets.all(0.0),
+                    child: Icon(Icons.emoji_objects),
+                  ),
+                ),
+              ),
+            ),
+            Container(
+              padding: EdgeInsets.symmetric(vertical: 16),
+              width: 125,
+              child: ElevatedButton(
+                onPressed: () {
+                  if (_formKey.currentState!.validate()) {
+                    criarTarefa(context);
+                  }
+                },
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    Icon(Icons.save),
+                    Text(' Salvar'),
+                  ],
+                ),
+                style: ButtonStyle(
+                  padding: MaterialStateProperty.all<EdgeInsets>(
+                      EdgeInsets.symmetric()),
+                ),
+              ),
+            ),
+          ],
+        ),
       ),
     );
     throw UnimplementedError();
