@@ -1,6 +1,7 @@
 import 'package:sqflite/sqflite.dart';
 import 'package:path/path.dart';
 import 'tarefa_dao.dart';
+import 'livro_dao.dart';
 
 // método para recuperar ref do banco de dados no futuro
 Future<Database> getDatabase() async {
@@ -13,8 +14,9 @@ Future<Database> getDatabase() async {
   return openDatabase(
     path,
     onCreate: (db, version) {
-      // criação do database (primeira execução do app cria a tabela)
+      // criação do database (primeira execução do app cria as tabelas)
       db.execute(TarefaDao.tableSQL);
+      db.execute(LivroDao.tableSQL);
     },
     onUpgrade: (db, oldVersion, newVersion) async {
       var batch = db.batch();
