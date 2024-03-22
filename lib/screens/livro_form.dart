@@ -13,7 +13,7 @@ class FormLivro extends StatefulWidget {
   final TextEditingController _controladorAutor = TextEditingController();
   final TextEditingController _controladorEditora = TextEditingController();
   final TextEditingController _controladorAno = TextEditingController();
-  int? _controladorLido; // integer se leu ou nao
+  int? _controladorLido = 0; // integer se leu ou não -> default 0
 
   @override
   State<StatefulWidget> createState() {
@@ -138,7 +138,8 @@ class FormLivroState extends State<FormLivro> {
                 padding: const EdgeInsets.all(8.0),
                 child: Row(
                   children: [
-                    Text('Já leu?'),
+                    Icon(Icons.check_circle_outline),
+                    Text(' Já leu?'),
                     SizedBox(width: 10),
                     Row(
                       children: [
