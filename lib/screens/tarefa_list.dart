@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:todo/database/tarefa_dao.dart';
-import '/model/tarefa.dart';
+import '/database/tarefa_dao.dart';
+import '/models/tarefa.dart';
 import '/screens/tarefa_form.dart';
 
 // lista de tarefas

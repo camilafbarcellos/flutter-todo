@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import '/database/livro_dao.dart';
-import '/components/editor.dart';
-import '/model/livro.dart';
+import '/models/livro.dart';
 
 // tela do formulário
 class FormLivro extends StatefulWidget {

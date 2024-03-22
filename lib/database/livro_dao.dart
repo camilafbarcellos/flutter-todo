@@ -1,5 +1,5 @@
 import 'package:sqflite/sqflite.dart';
-import '/model/livro.dart';
+import '/models/livro.dart';
 import 'app_database.dart';
 
 class LivroDao {

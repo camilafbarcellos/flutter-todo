@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import '/database/tarefa_dao.dart';
-import '/components/editor.dart';
-import '/model/tarefa.dart';
+import '/models/tarefa.dart';
 
 // tela do formulário
 class FormTarefa extends StatefulWidget {

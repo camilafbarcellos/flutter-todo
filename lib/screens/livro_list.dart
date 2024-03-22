@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import '/database/livro_dao.dart';
-import '/model/livro.dart';
+import '/models/livro.dart';
 import '/screens/livro_form.dart';
 
 // lista de livros

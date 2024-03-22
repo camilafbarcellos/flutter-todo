@@ -1,6 +1,6 @@
 import 'package:sqflite/sqflite.dart';
 import 'app_database.dart';
-import '/model/tarefa.dart';
+import '/models/tarefa.dart';
 
 class TarefaDao {
   static const String _tableName = 'tarefas';
