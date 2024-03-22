@@ -23,7 +23,7 @@ class ListaLivroState extends State<ListaLivro> {
       // widget da página home
       appBar: AppBar(
           // widget da barra superior
-          title: Text("Lista de Livros") // título da página
+          title: Text("Estante de Livros") // título da página
           ),
       body: FutureBuilder<List<Livro>>(
           // construtor para lista futura
@@ -89,17 +89,44 @@ class ListaLivroState extends State<ListaLivro> {
       },
       child: Card(
         child: ListTile(
-          leading: Icon(Icons.book_outlined), // esquerda
-          title: Text(_livro.nome),
+          leading: Icon(Icons.book), // esquerda
+          title: Text(
+            _livro.nome,
+            style: TextStyle(fontSize: 16.5, fontWeight: FontWeight.w600),
+          ),
           subtitle: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              Text(_livro.autor),
-              Text(_livro.editora),
-              Text(_livro.ano),
-              _livro.lido == 1
-                  ? Icon(Icons.check_circle_outline)
-                  : Icon(Icons.circle_outlined),
+              Row(
+                children: [
+                  Icon(Icons.person_outline),
+                  Text(' ${_livro.autor}'),
+                ],
+              ),
+              Row(
+                children: [
+                  Icon(Icons.account_balance_outlined),
+                  Text(' ${_livro.editora}'),
+                ],
+              ),
+              Row(
+                mainAxisAlignment: MainAxisAlignment.spaceAround,
+                children: [
+                  Row(
+                    children: [
+                      Icon(Icons.event_outlined),
+                      Text(' ${_livro.ano}'),
+                    ],
+                  ),
+                  Row(
+                    children: [
+                      _livro.lido == 1
+                          ? Icon(Icons.check_circle_outline)
+                          : Icon(Icons.circle_outlined),
+                      _livro.lido == 1 ? Text(' Lido') : Text(' Não lido')
+                    ],
+                  ),
+                ],
+              ),
             ],
           ),
           trailing: Row(
