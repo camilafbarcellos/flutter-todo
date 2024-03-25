@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:todo/screens/cartas.dart';
 import '/screens/livro_list.dart';
 import '/screens/gifs.dart';
 import '/screens/tarefa_list.dart';
@@ -21,20 +22,23 @@ class MenuOptionsState extends State<MenuOptions> {
         controller: pc,
         children: [
           ListaTarefa(),
-          ListaLivro(),
           GifsPage(),
+          ListaLivro(),
+          CartasPage(),
         ],
         onPageChanged: setPaginaAtual,
       ),
       bottomNavigationBar: BottomNavigationBar(
+        type: BottomNavigationBarType.fixed,
         currentIndex: paginaAtual,
         items: [
           BottomNavigationBarItem(
               icon: Icon(Icons.access_alarm), label: 'Tarefas'),
           BottomNavigationBarItem(
-              icon: Icon(Icons.menu_book_outlined), label: 'Livros'),
+              icon: Icon(Icons.gif_box_outlined), label: 'GIFs'),
           BottomNavigationBarItem(
-              icon: Icon(Icons.gif_box_outlined), label: 'GIFs')
+              icon: Icon(Icons.menu_book_outlined), label: 'Livros'),
+          BottomNavigationBarItem(icon: Icon(Icons.casino), label: 'Cartas')
         ],
         onTap: (pagina) {
           // animação ao clicar para trocar de página
