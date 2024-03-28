@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:todo/menu.dart';
 import '/database/tarefa_dao.dart';
+import '/theme/app_theme.dart';
 
 void main() {
   runApp(TarefaApp());
@@ -16,8 +17,11 @@ class TarefaApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-        // widget pai do app com Material
-        home: MenuOptions());
+      // widget pai do app com Material
+      home: MenuOptions(),
+      // tema personalizado
+      theme: appTheme,
+    );
     throw UnimplementedError();
   }
 }

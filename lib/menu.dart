@@ -29,7 +29,7 @@ class MenuOptionsState extends State<MenuOptions> {
         onPageChanged: setPaginaAtual,
       ),
       bottomNavigationBar: BottomNavigationBar(
-        type: BottomNavigationBarType.fixed,
+        // type: BottomNavigationBarType.fixed,
         currentIndex: paginaAtual,
         items: [
           BottomNavigationBarItem(

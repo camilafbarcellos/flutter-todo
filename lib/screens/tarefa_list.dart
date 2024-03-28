@@ -111,7 +111,7 @@ class ListaTarefaState extends State<ListaTarefa> {
                 },
                 child: Padding(
                   padding: EdgeInsets.all(8),
-                  child: Icon(Icons.remove_circle, color: Colors.red),
+                  child: Icon(Icons.remove_circle, color: Colors.pinkAccent),
                 ),
               )
             ],

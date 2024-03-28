@@ -140,7 +140,7 @@ class ListaLivroState extends State<ListaLivro> {
                 },
                 child: Padding(
                   padding: EdgeInsets.all(8),
-                  child: Icon(Icons.remove_circle, color: Colors.red),
+                  child: Icon(Icons.remove_circle, color: Colors.pinkAccent),
                 ),
               )
             ],

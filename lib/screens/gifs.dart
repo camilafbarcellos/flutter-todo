@@ -59,7 +59,8 @@ class GifsPageState extends State<GifsPage> {
               decoration: InputDecoration(
                   labelText: "Pesquise Aqui!",
                   labelStyle: TextStyle(color: Colors.white),
-                  border: OutlineInputBorder()),
+                  border: OutlineInputBorder(),
+                  fillColor: Colors.black),
               style: TextStyle(color: Colors.white, fontSize: 18.0),
               textAlign: TextAlign.center,
               onSubmitted: (text) {
